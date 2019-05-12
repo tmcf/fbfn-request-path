@@ -1,0 +1,32 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "/api/epsilon/*",
+        "function": "api-epsilon"
+      },
+      {
+        "source": "/api/v1/alpha/*",
+        "function": "api-v1-alpha"
+      },
+      {
+        "source": "/api/v1/beta/*",
+        "function": "api-v1-beta"
+      },
+      {
+        "source": "/api/v2/alpha/*",
+        "function": "api-v2-alpha"
+      },
+      {
+        "source": "/api/v2/beta/*",
+        "function": "api-v2-beta"
+      },
+      {
+        "source": "/api/v1/A/zeta/*",
+        "function": "api-v1-A-zeta"
+      }
+    ]
+  }
+}

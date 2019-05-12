@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Firebase Functions Request Path Tests</title>
+
+
+    <style media="screen">
+      body {
+        background: #eceff1;
+        color: rgba(0, 0, 0, 0.87);
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 32px;
+      }
+      .rdiv {
+        background:white;
+        border: 1px solid black;
+        margin:32px;
+        padding:16px;
+      }
+      .heavy {
+        font-weight:bold
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Firebase Functions Request Paths Test:</h2>
+
+    <div id="results" class="rdiv"></div>
+
+    <script>
+
+      const addLabelValue = (parent, label, value) => {
+        const ediv = document.createElement('div')
+        if (label){
+          const nlabel = document.createTextNode(label+":  ")
+          ediv.appendChild(nlabel)
+        }
+        const nvalue = document.createTextNode(value)
+        const nspan = document.createElement('span')
+        nspan.setAttribute('class','heavy')
+        nspan.appendChild(nvalue)
+        
+        ediv.appendChild(nspan)
+        parent.appendChild(ediv)
+        return ediv
+      };
+      document.addEventListener("DOMContentLoaded", async function() {
+
+        // Cloud function endpoints and an arbitrary resource (r1, r2, r3...) to request from each of them
+        const apiEndPoints = [
+          "/api/v1/alpha",
+          "/api/v1/beta",
+          "api/v1/A/zeta",
+          "api/v2/alpha",
+          "api/v2/beta",
+          "api/epsilon"
+        ];
+        // Fetch a resource beneath the API endpoint prefix so rewrite rule will trigger
+        await Promise.all(
+          apiEndPoints.map(async endpoint => {
+            const response = await fetch(endpoint + "/sub-resource");
+            return response.json();
+          })
+        ).then(results => {
+          // Render results
+          const mdiv = document.getElementById('results');
+          results.forEach(result => {
+            const rdiv = document.createElement('div');
+            rdiv.setAttribute('class','rdiv');
+            addLabelValue(rdiv, "Handler", result.handler)
+            addLabelValue(rdiv, "firebase.json rewrite source:", result.expectedPath+"/*")
+            addLabelValue(rdiv,null, "Firebase Function:")
+            addLabelValue(rdiv, "received request url", result.requestUrl);
+            mdiv.appendChild(rdiv);
+
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
