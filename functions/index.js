@@ -6,7 +6,8 @@
 
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-admin.initializeApp()
+admin.initializeApp() // work-around firebase-tools/#1278
+
 
 console.log("Process env for cloud functions:")
 const env = process.env;

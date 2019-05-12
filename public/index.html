@@ -50,6 +50,7 @@
       document.addEventListener("DOMContentLoaded", async function() {
 
         // Cloud function endpoints and an arbitrary resource (r1, r2, r3...) to request from each of them
+        // endpoints specified in rewrite rules, firebase.json. No error handling
         const apiEndPoints = [
           "/api/v1/alpha",
           "/api/v1/beta",
