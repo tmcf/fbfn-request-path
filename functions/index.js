@@ -53,8 +53,8 @@ exports.api = {
 		}
 	},
 	v2: {
-		alpha: logUrlHandler('gamma','/api/v2'),
-		beta: logUrlHandler('delta', '/api/v2'),		
+		alpha: logUrlHandler('alpha','/api/v2'),
+		beta: logUrlHandler('beta', '/api/v2'),		
 	},
 	epsilon: logUrlHandler('epsilon', '/api')
 }
