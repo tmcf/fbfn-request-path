@@ -1,5 +1,9 @@
 ## fbfn-request-path
 
+**This issue described here has been resolved**
+
+See [firebase/firebase-tools#1279](https://github.com/firebase/firebase-tools/issues/1279)
+
 This project demonstrates the differences in the request path that firebase cloud functions
 see when running in the emulator vs a live deployment. The request path in the emulator is
 not as expected.
